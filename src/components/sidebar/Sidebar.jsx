@@ -14,8 +14,8 @@ export const Sidebar = ({ remainingPairs, turnType }) => {
       <Middle>
         <Blocky remainingPairs={remainingPairs} turnType={turnType} />
 
-        <p>Progress:</p>
-        <ProgressBar remainingPairs={remainingPairs} />
+        {/* <p>Progress:</p> */}
+        {/* <ProgressBar remainingPairs={remainingPairs} /> */}
       </Middle>
 
       <Footer>
@@ -35,11 +35,11 @@ export const Sidebar = ({ remainingPairs, turnType }) => {
           >
             <img src={linkedInLogo} alt="LinkedIn Logo" />
           </a>
-          <p>
+          {/* <p>
             Emilio Herrera
             <br />
             Soukup
-          </p>
+          </p> */}
         </LogoHolder>
       </Footer>
     </Wrapper>

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 
-import { colors } from '../utils/constants';
+import { colors, device } from '../utils/constants';
 
 export const Blocky = ({ turnType }) => {
   const theme = useTheme();
@@ -23,13 +23,14 @@ export const Blocky = ({ turnType }) => {
       <Character>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="127.433"
-          height="132.743"
+          width="100%"
+          height="100%"
           x="0"
           y="0"
           version="1.1"
           viewBox="0 0 127.433 132.743"
           xmlSpace="preserve"
+          preserveAspectRatio="meet"
         >
           <rect
             width="127.433"
@@ -55,8 +56,9 @@ export const Blocky = ({ turnType }) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
-          width="122.436"
-          height="39.744"
+          preserveAspectRatio="meet"
+          width="100%"
+          height="100%"
           x="61"
           y="20"
           version="1.1"
@@ -99,18 +101,26 @@ const shrink = keyframes`
     `;
 
 const Wrapper = styled.div`
-  width: 130px;
+  width: 50px;
   margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media ${device.laptop} {
+    width: 130px;
+  }
 `;
 
 const Character = styled.div`
   animation: ${float} 3s ease-out infinite;
-  width: 130px;
+  width: 100%;
 `;
 
 const Shadow = styled.div`
-  width: 130px;
+  width: 100%;
   margin-top: 15px;
+
   svg {
     animation: ${shrink} 3s ease-out infinite;
     transform-origin: center center;

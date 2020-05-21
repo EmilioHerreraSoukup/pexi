@@ -5,6 +5,7 @@ import { Sidebar } from './sidebar/Sidebar';
 import { WinScreen } from './WinScreen';
 
 import { shuffle } from '../utils/utils';
+import { device } from '../utils/constants';
 
 const createCards = (num) => {
   const array = [];
@@ -85,6 +86,17 @@ export const Game = () => {
     }
   };
 
+  const resetGame = () => {
+    setCards(createCards(16));
+    setGameStatus({
+      remainingCards: 16,
+      firstCard: null,
+      secondCard: null,
+      turnNumber: 0,
+      turnType: null
+    });
+  };
+
   const handleCardClick = (index) => {
     if (!cards[index].canFlip) {
       return;
@@ -116,7 +128,8 @@ export const Game = () => {
 
   return (
     <Wrapper>
-      {remainingCards <= 0 && <WinScreen />}
+      {remainingCards <= 0 && <WinScreen onReset={resetGame} />}
+      {/* <WinScreen onReset={resetGame} /> */}
       {remainingCards > 0 && (
         <Board>
           {cards.map((card, i) => (
@@ -135,19 +148,31 @@ const Board = styled.div`
   margin: 0 auto;
   width: 100%;
   display: grid;
-  column-gap: 24px;
-  row-gap: 24px;
+  column-gap: 12px;
+  row-gap: 12px;
+  padding: 12px;
   box-sizing: border-box;
-  height: 100vh;
-  padding: 50px;
   background: #f3f5f2;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 2fr 2fr 2fr 2fr;
+
+  @media ${device.laptop} {
+    column-gap: 24px;
+    row-gap: 24px;
+    padding: 50px;
+  }
 `;
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 80% 20%;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
+  grid-template-columns: 100%;
+  grid-template-rows: 60% 40%;
+
+  @media ${device.laptop} {
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 100%;
+  }
 `;

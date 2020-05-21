@@ -24,9 +24,15 @@ const createCards = (num) => {
 
 export const Game = () => {
   const [cards, setCards] = useState(createCards(16));
-  const [firstCard, setFirstCard] = useState();
-  const [secondCard, setSecondCard] = useState();
-  const [remainingCards, setRemainingCards] = useState(16);
+  const [gameStatus, setGameStatus] = useState({
+    remainingCards: 16,
+    firstCard: null,
+    secondCard: null,
+    turnNumber: 0,
+    turnType: null
+  });
+
+  const { firstCard, secondCard, remainingCards } = gameStatus;
 
   const flipCard = (index) => {
     const updatedCards = [...cards];
@@ -39,8 +45,14 @@ export const Game = () => {
     updatedCards[firstCard.index] = { ...cards[firstCard.index], flipped: false, canFlip: true };
     updatedCards[secondCard.index] = { ...cards[secondCard.index], flipped: false, canFlip: true };
     setCards(updatedCards);
-    setFirstCard(null);
-    setSecondCard(null);
+
+    setGameStatus({
+      ...gameStatus,
+      firstCard: null,
+      secondCard: null,
+      turnNumber: gameStatus.turnNumber + 1,
+      turnType: 'reset'
+    });
   };
 
   const discardCards = () => {
@@ -48,9 +60,14 @@ export const Game = () => {
     updatedCards[firstCard.index] = { ...cards[firstCard.index], discarted: true };
     updatedCards[secondCard.index] = { ...cards[secondCard.index], discarted: true };
     setCards(updatedCards);
-    setFirstCard(null);
-    setSecondCard(null);
-    setRemainingCards(remainingCards - 2);
+
+    setGameStatus({
+      ...gameStatus,
+      firstCard: null,
+      secondCard: null,
+      remainingCards: remainingCards - 2,
+      turnType: 'win'
+    });
   };
 
   const checkGameStatus = () => {
@@ -74,12 +91,19 @@ export const Game = () => {
     }
     if (!firstCard && !secondCard) {
       flipCard(index);
-      setFirstCard({ value: cards[index].value, index });
+
+      setGameStatus({
+        ...gameStatus,
+        firstCard: { value: cards[index].value, index }
+      });
     }
 
     if (firstCard && !secondCard) {
       flipCard(index);
-      setSecondCard({ value: cards[index].value, index });
+      setGameStatus({
+        ...gameStatus,
+        secondCard: { value: cards[index].value, index }
+      });
     }
     if (firstCard && secondCard) {
       resetCards();
@@ -102,7 +126,7 @@ export const Game = () => {
         </Board>
       )}
 
-      <Sidebar remainingPairs={remainingCards / 2} />
+      <Sidebar remainingPairs={remainingCards / 2} turnType={gameStatus.turnType} />
     </Wrapper>
   );
 };

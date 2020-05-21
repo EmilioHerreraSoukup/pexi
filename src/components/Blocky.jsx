@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 
 import { colors } from '../utils/constants';
 
-export const Blocky = () => {
+export const Blocky = ({ turnType }) => {
   const theme = useTheme();
+
+  const [mood, setMood] = useState('not-happy');
+
+  useEffect(() => {
+    if (turnType === 'win') {
+      setMood('happy');
+    } else {
+      setMood('not-happy');
+    }
+  }, [turnType]);
 
   return (
     <Wrapper>
@@ -31,10 +41,13 @@ export const Blocky = () => {
 
           <circle cx="86.238" cy="57.885" r="6.667" fill={colors.gray} />
           <circle cx="40.072" cy="57.885" r="6.667" fill={colors.gray} />
-          <path
-            fill={colors.gray}
-            d="M71.916 62.782a2.004 2.004 0 00-3.584-1.324c-.758.766-2.483 2.235-4.696 2.358-1.696.094-3.438-.625-5.191-2.137a.106.106 0 00-.011-.009l.002.005a1.988 1.988 0 00-1.235-.509 2.002 2.002 0 00-1.208 3.666l-.003-.001c2.221 1.871 4.536 2.88 6.912 2.986.333.014.67.012 1.007-.01 3.163-.191 5.572-1.942 6.888-3.166l.452-.453c.021-.019.04-.041.06-.061l.034-.034-.021.02c.344-.342.57-.806.594-1.331z"
-          />
+          {mood === 'happy' && (
+            <path
+              fill={colors.gray}
+              d="M71.916 62.782a2.004 2.004 0 00-3.584-1.324c-.758.766-2.483 2.235-4.696 2.358-1.696.094-3.438-.625-5.191-2.137a.106.106 0 00-.011-.009l.002.005a1.988 1.988 0 00-1.235-.509 2.002 2.002 0 00-1.208 3.666l-.003-.001c2.221 1.871 4.536 2.88 6.912 2.986.333.014.67.012 1.007-.01 3.163-.191 5.572-1.942 6.888-3.166l.452-.453c.021-.019.04-.041.06-.061l.034-.034-.021.02c.344-.342.57-.806.594-1.331z"
+            />
+          )}
+          {mood !== 'happy' && <circle cx="67.072" cy="65.885" r="3.667" fill={colors.gray} />}
         </svg>
       </Character>
 

@@ -5,14 +5,14 @@ import { Blocky } from '../Blocky';
 import { ProgressBar } from '../ProgressBar';
 import { Wrapper, Middle, LogoHolder, Footer, Logo } from './Sidebar.styles';
 
-export const Sidebar = ({ remainingPairs }) => {
+export const Sidebar = ({ remainingPairs, turnType }) => {
   return (
     <Wrapper>
       <Logo>
         <h1>PEXY</h1>
       </Logo>
       <Middle>
-        <Blocky />
+        <Blocky remainingPairs={remainingPairs} turnType={turnType} />
 
         <p>Progress:</p>
         <ProgressBar remainingPairs={remainingPairs} />

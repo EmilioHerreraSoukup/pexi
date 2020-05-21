@@ -20,5 +20,5 @@ export const getRandomColor = () => {
 
   const randomIndex = Math.floor(Math.random() * 5);
 
-  return colors[randomIndex];
+  return `#${colors[randomIndex]}`;
 };

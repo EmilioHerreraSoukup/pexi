@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Card } from './Card';
-import { Sidebar } from './Sidebar';
+import { Card } from './card/Card';
+import { Sidebar } from './sidebar/Sidebar';
 import { WinScreen } from './WinScreen';
 
-import { shuffle, getRandomColor } from '../utils/utils';
+import { shuffle } from '../utils/utils';
 
 const createCards = (num) => {
   const array = [];
@@ -27,7 +27,6 @@ export const Game = () => {
   const [firstCard, setFirstCard] = useState();
   const [secondCard, setSecondCard] = useState();
   const [remainingCards, setRemainingCards] = useState(16);
-  const [color] = useState(getRandomColor());
 
   const flipCard = (index) => {
     const updatedCards = [...cards];
@@ -54,13 +53,9 @@ export const Game = () => {
     setRemainingCards(remainingCards - 2);
   };
 
-  const gameWon = () => {
-    console.log('emilio', 'won');
-  };
-
   const checkGameStatus = () => {
     if (remainingCards === 0) {
-      gameWon();
+      // gameWon();
     }
     if (firstCard && secondCard) {
       if (firstCard.value === secondCard.value) {
@@ -98,15 +93,16 @@ export const Game = () => {
   return (
     <Wrapper>
       {remainingCards <= 0 && <WinScreen />}
-      <Board>
-        {remainingCards > 0 &&
-          cards.map((card, i) => (
+      {remainingCards > 0 && (
+        <Board>
+          {cards.map((card, i) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Card card={card} key={i} index={i} onClick={handleCardClick} baseColor={color} />
+            <Card card={card} key={i} index={i} onClick={handleCardClick} />
           ))}
-      </Board>
+        </Board>
+      )}
 
-      <Sidebar color={color} remainingPairs={remainingCards / 2} />
+      <Sidebar remainingPairs={remainingCards / 2} />
     </Wrapper>
   );
 };

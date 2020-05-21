@@ -1,26 +1,7 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
+import { colors } from '../../utils/constants';
 
-export const Card = ({ card: { value, discarted, flipped }, onClick, index, baseColor }) => (
-  <Box flipped={flipped} discarted={discarted} onClick={() => onClick(index)}>
-    <CardFace>?</CardFace>
-    <Back baseColor={baseColor}>{value}</Back>
-  </Box>
-);
-
-Card.propTypes = {
-  card: PropTypes.shape({
-    flipped: PropTypes.bool,
-    value: PropTypes.string,
-    discarted: PropTypes.bool
-  }).isRequired,
-  onClick: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
-  baseColor: PropTypes.string.isRequired
-};
-
-const Box = styled.div`
+export const Box = styled.div`
   width: 100%;
   height: 100%;
   opacity: ${({ discarted }) => `${discarted ? '0' : '1'}`};
@@ -38,7 +19,7 @@ const Box = styled.div`
   }
 `;
 
-const CardFace = styled.div`
+export const CardFace = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
@@ -48,10 +29,10 @@ const CardFace = styled.div`
   display: flex;
   border-radius: 5px;
   background: white;
-  color: #4e4b5c;
+  color: ${colors.gray};
 `;
 
-const Back = styled(CardFace)`
+export const Back = styled(CardFace)`
   transform: rotateY(180deg);
-  background: ${({ baseColor }) => `#${baseColor}`};
+  background: ${({ color }) => color};
 `;

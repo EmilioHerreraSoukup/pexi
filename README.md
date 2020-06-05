@@ -1,6 +1,6 @@
 # Pexi
 
-Memory game built with react. [Live demo here!](https://www.pexy.netlify.com )
+Memory game built with react. [Live demo here!](https://pexy.netlify.app/ )
 
 
 

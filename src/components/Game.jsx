@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Card } from './card/Card';
 import { Sidebar } from './sidebar/Sidebar';
+import { Board } from './board/Board';
 import { WinScreen } from './WinScreen';
 
 import { shuffle } from '../utils/utils';
 import { device } from '../utils/constants';
 
 const createCards = (num) => {
-  const array = [];
+  const cards = [];
 
   for (let index = 0; index < num; index += 1) {
     const card = {
@@ -18,9 +18,9 @@ const createCards = (num) => {
       canFlip: true
     };
 
-    array.push(card);
+    cards.push(card);
   }
-  return shuffle(array);
+  return shuffle(cards);
 };
 
 export const Game = () => {
@@ -87,7 +87,10 @@ export const Game = () => {
   };
 
   const resetGame = () => {
+    // Reset Cards
     setCards(createCards(16));
+
+    // Reset Game Status
     setGameStatus({
       remainingCards: 16,
       firstCard: null,
@@ -130,38 +133,12 @@ export const Game = () => {
     <Wrapper>
       {remainingCards <= 0 && <WinScreen onReset={resetGame} />}
       {/* <WinScreen onReset={resetGame} /> */}
-      {remainingCards > 0 && (
-        <Board>
-          {cards.map((card, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Card card={card} key={i} index={i} onClick={handleCardClick} />
-          ))}
-        </Board>
-      )}
+      {remainingCards > 0 && <Board handleCardClick={handleCardClick} cards={cards} />}
 
       <Sidebar remainingPairs={remainingCards / 2} turnType={gameStatus.turnType} />
     </Wrapper>
   );
 };
-
-const Board = styled.div`
-  margin: 0 auto;
-  width: 100%;
-  display: grid;
-  column-gap: 12px;
-  row-gap: 12px;
-  padding: 12px;
-  box-sizing: border-box;
-  background: #f3f5f2;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 2fr 2fr 2fr 2fr;
-
-  @media ${device.laptop} {
-    column-gap: 24px;
-    row-gap: 24px;
-    padding: 50px;
-  }
-`;
 
 const Wrapper = styled.div`
   display: grid;
@@ -172,6 +149,11 @@ const Wrapper = styled.div`
   grid-template-rows: 60% 40%;
 
   @media ${device.laptop} {
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 100%;
+  }
+
+  @media ${device.laptopL} {
     grid-template-columns: 80% 20%;
     grid-template-rows: 100%;
   }

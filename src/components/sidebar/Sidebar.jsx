@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import gitHubLogo from '../../imgs/gitHubLogo.png';
 import linkedInLogo from '../../imgs/linkedinLogo.png';
 import { Blocky } from '../Blocky';
@@ -13,9 +14,6 @@ export const Sidebar = ({ remainingPairs, turnType }) => {
       </Logo>
       <Middle>
         <Blocky remainingPairs={remainingPairs} turnType={turnType} />
-
-        {/* <p>Progress:</p> */}
-        {/* <ProgressBar remainingPairs={remainingPairs} /> */}
       </Middle>
 
       <Footer>
@@ -35,13 +33,13 @@ export const Sidebar = ({ remainingPairs, turnType }) => {
           >
             <img src={linkedInLogo} alt="LinkedIn Logo" />
           </a>
-          {/* <p>
-            Emilio Herrera
-            <br />
-            Soukup
-          </p> */}
         </LogoHolder>
       </Footer>
     </Wrapper>
   );
+};
+
+Sidebar.propTypes = {
+  remainingPairs: PropTypes.number.isRequired,
+  turnType: PropTypes.string.isRequired
 };

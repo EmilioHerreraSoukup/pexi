@@ -30,7 +30,6 @@ export const Blocky = ({ turnType }) => {
           version="1.1"
           viewBox="0 0 127.433 132.743"
           xmlSpace="preserve"
-          preserveAspectRatio="meet"
         >
           <rect
             width="127.433"
@@ -56,7 +55,6 @@ export const Blocky = ({ turnType }) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
-          preserveAspectRatio="meet"
           width="100%"
           height="100%"
           x="61"
@@ -105,7 +103,8 @@ const Wrapper = styled.div`
   margin: 0 auto;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
 
   @media ${device.laptop} {
     width: 130px;

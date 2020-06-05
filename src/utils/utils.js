@@ -16,7 +16,7 @@ export const shuffle = (array) => {
 };
 
 export const getRandomColor = () => {
-  const colors = ['40F99B', 'ff88dc', 'bdadea', '42e6ff', 'faff7f'];
+  const colors = ['40F99B', 'ff88dc', 'bdadea', '42e6ff', '2EC4B6', '20A4F3', 'AD7A99', 'B2CEDE'];
 
   const randomIndex = Math.floor(Math.random() * 5);
 

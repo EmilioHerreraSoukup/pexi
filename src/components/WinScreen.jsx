@@ -26,6 +26,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: #f3f5f2;
   text-align: center;
+  font-size: 20px;
 
   h2 {
     font-size: 72px;
@@ -36,10 +37,22 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
-  padding: 24px;
-  border-radius: 15px;
-  background-color: ${({ color }) => `${color}`};
+  padding: 1em 2em;
+  border-radius: 3px;
+  background-color: transparent;
   cursor: pointer;
-  border: none;
-  font-size: 20px;
+  font-size: 0.625em;
+  border: ${({ color }) => `2px solid ${color}`};
+  transition: 300ms ease background-color;
+
+  text-transform: uppercase;
+  font-weight: 700;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: ${({ color }) => `${color}`};
+  }
 `;

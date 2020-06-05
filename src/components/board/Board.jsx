@@ -32,6 +32,10 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 2fr 2fr 2fr 2fr;
 
+  @media ${device.mobileL} {
+    padding: 12px 10%;
+  }
+
   @media ${device.laptop} {
     column-gap: 24px;
     row-gap: 24px;

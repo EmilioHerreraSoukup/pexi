@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useTheme } from 'emotion-theming';
+import { colors } from '../utils/constants';
 
 export const WinScreen = ({ onReset }) => {
   const theme = useTheme();
@@ -8,8 +9,6 @@ export const WinScreen = ({ onReset }) => {
   return (
     <Wrapper color={theme.color}>
       <h2>You Won!</h2>
-
-      {/* <Blocky /> */}
 
       <Button onClick={() => onReset()} color={theme.color}>
         Go Again!
@@ -44,7 +43,7 @@ const Button = styled.button`
   font-size: 0.625em;
   border: ${({ color }) => `2px solid ${color}`};
   transition: 300ms ease background-color;
-
+  color: ${colors.gray};
   text-transform: uppercase;
   font-weight: 700;
 

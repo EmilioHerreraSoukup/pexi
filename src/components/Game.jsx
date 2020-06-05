@@ -30,7 +30,7 @@ export const Game = () => {
     firstCard: null,
     secondCard: null,
     turnNumber: 0,
-    turnType: null
+    turnType: 'win'
   });
 
   const { firstCard, secondCard, remainingCards } = gameStatus;

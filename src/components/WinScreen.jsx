@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useTheme } from 'emotion-theming';
+import PropTypes from 'prop-types';
 import { colors } from '../utils/constants';
 
 export const WinScreen = ({ onReset }) => {
@@ -15,6 +16,10 @@ export const WinScreen = ({ onReset }) => {
       </Button>
     </Wrapper>
   );
+};
+
+WinScreen.propTypes = {
+  onReset: PropTypes.func.isRequired
 };
 
 const Wrapper = styled.div`

@@ -15,7 +15,6 @@ export const Box = styled.div`
 
   &:hover {
     transform: ${({ flipped }) => `${flipped ? '' : 'translateY(-4px)'}`};
-    box-shadow: ${({ flipped }) => `${flipped ? '' : '0px 8px 5px 0px rgb(220, 220, 220)'}`};
   }
 `;
 

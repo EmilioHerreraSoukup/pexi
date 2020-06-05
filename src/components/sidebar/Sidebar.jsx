@@ -19,7 +19,7 @@ export const Sidebar = ({ remainingPairs, turnType }) => {
       <Footer>
         <LogoHolder>
           <a
-            href="https://github.com/EmilioHerreraSoukup"
+            href="https://github.com/EmilioHerreraSoukup/pexi"
             target="_blank"
             rel="noopener noreferrer"
           >

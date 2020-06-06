@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from 'emotion-theming';
 import { Box, CardFace, Back } from './Card.styles';
 
-export const Card = ({ card: { value, discarted, flipped }, onClick, index }) => {
+export const Card = ({ card: { value, discarted, flipped, emoji }, onClick, index }) => {
   const theme = useTheme();
 
   return (
@@ -15,7 +15,7 @@ export const Card = ({ card: { value, discarted, flipped }, onClick, index }) =>
       data-value={value}
     >
       <CardFace>?</CardFace>
-      <Back color={theme.color}>{value}</Back>
+      <Back color={theme.color}>{emoji}</Back>
     </Box>
   );
 };
@@ -24,7 +24,8 @@ Card.propTypes = {
   card: PropTypes.shape({
     flipped: PropTypes.bool,
     value: PropTypes.string,
-    discarted: PropTypes.bool
+    discarted: PropTypes.bool,
+    emoji: PropTypes.string
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired

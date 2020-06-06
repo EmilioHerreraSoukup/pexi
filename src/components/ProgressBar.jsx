@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useTheme } from 'emotion-theming';
-import { colors } from '../utils/constants';
+import { Timer } from './Timer';
+import { colors, device } from '../utils/constants';
 
 export const ProgressBar = ({ remainingPairs }) => {
   const theme = useTheme();
@@ -12,18 +13,48 @@ export const ProgressBar = ({ remainingPairs }) => {
   };
 
   return (
-    <Bar>
-      <Fill percentage={getPercentage()} color={theme.color} />
-    </Bar>
+    <Holder>
+      <Bar>
+        <Fill percentage={getPercentage()} color={theme.color} />
+      </Bar>
+      <Timer remainingPairs={remainingPairs} />
+    </Holder>
   );
 };
 
-const Bar = styled.div`
+const Holder = styled.div`
+  position: absolute;
+  bottom: -10px;
   width: 100%;
-  height: 10px;
+  bottom: -62px;
+
+  @media ${device.tablet} {
+    bottom: -50px;
+  }
+
+  p {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    color: ${colors.gray};
+    font-variant-numeric: tabular-nums;
+    font-family: monospace;
+  }
+`;
+
+const Bar = styled.div`
+  width: 90%;
+  margin: 0 auto;
   border-radius: 16px;
-  position: relative;
   border: 1px solid ${colors.gray};
+  height: 7px;
+  position: relative;
+
+  @media ${device.tablet} {
+    bottom: 0;
+    border: 3px solid ${colors.gray};
+    height: 10px;
+  }
 `;
 
 const Fill = styled.div`

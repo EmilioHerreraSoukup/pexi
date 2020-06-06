@@ -10,7 +10,7 @@ export const Box = styled.div`
   position: relative;
   transform: ${({ flipped }) =>
     `${flipped ? 'rotateY(180deg) translateY(0);' : 'rotateY(0deg) translateY(0);'}`};
-  transition: transform 300ms ease, box-shadow 300ms ease;
+  transition: transform 300ms ease, box-shadow 300ms ease, opacity 300ms ease;
   transform-style: preserve-3d;
 
   &:hover {
@@ -29,6 +29,9 @@ export const CardFace = styled.div`
   border-radius: 5px;
   background: white;
   color: ${colors.gray};
+  user-select: none;
+
+  font-size: 65px;
 `;
 
 export const Back = styled(CardFace)`

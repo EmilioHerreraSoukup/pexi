@@ -22,3 +22,9 @@ export const getRandomColor = () => {
 
   return `#${colors[randomIndex]}`;
 };
+
+export const getEmoji = (value) => {
+  const emoji = ['👻', '🐶', '🤖', '🐼', '🐷', '💩', '🐸', '👽'];
+
+  return emoji[value];
+};

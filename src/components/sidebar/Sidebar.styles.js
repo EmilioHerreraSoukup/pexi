@@ -9,13 +9,18 @@ export const Wrapper = styled.div`
   display: grid;
   align-items: center;
   border-top: 4px solid ${colors.gray};
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr;
+
+  @media ${device.tablet} {
+    border-left: 4px solid ${colors.gray};
+    border-top: none;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
 
   @media ${device.laptop} {
     border-left: 4px solid ${colors.gray};
     border-top: none;
     padding: 24px 12%;
-    grid-template-rows: 1fr 1fr 1fr;
   }
 `;
 
@@ -44,19 +49,7 @@ export const Middle = styled.div`
   height: 100%;
   max-width: 320px;
   margin: 0 auto;
-
-  @media ${device.laptop} {
-    margin-top: 250px;
-  }
-
-  p {
-    color: ${colors.gray};
-    margin-top: 70px;
-
-    @media ${device.laptop} {
-      margin-top: 250px;
-    }
-  }
+  position: relative;
 `;
 
 export const Footer = styled.div`
@@ -69,10 +62,13 @@ export const Footer = styled.div`
   align-self: end;
 
   p {
-    font-size: 14px;
+    font-size: 12px;
     width: 100%;
     text-align: center;
     color: ${colors.gray};
+    opacity: 0.5;
+    text-transform: uppercase;
+    margin: 0;
   }
 `;
 

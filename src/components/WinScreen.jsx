@@ -46,17 +46,14 @@ const Button = styled.button`
   background-color: transparent;
   cursor: pointer;
   font-size: 0.625em;
-  border: ${({ color }) => `2px solid ${color}`};
+  border: 2px solid ${colors.gray};
   transition: 300ms ease background-color;
   color: ${colors.gray};
   text-transform: uppercase;
   font-weight: 700;
+  background-color: ${({ color }) => `${color}`};
 
   &:focus {
     outline: none;
-  }
-
-  &:hover {
-    background-color: ${({ color }) => `${color}`};
   }
 `;

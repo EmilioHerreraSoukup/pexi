@@ -85,16 +85,13 @@ const float = keyframes`
 
 const shrink = keyframes`
     0% {
-      width: 90%;
-      margin: 0 5%;
+      transform: scaleX( 0.9);
     }
     50% {
-      width: 60%;
-      margin: 0 18%;
+      transform: scaleX(0.6);
     }
     100% {
-      width: 90%;
-      margin: 0 5%;
+      transform: scaleX(0.9);
     }
     `;
 
@@ -106,7 +103,7 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
   top: 50%;
 
-  @media ${device.laptop} {
+  @media ${device.tablet} {
     width: 130px;
   }
 `;

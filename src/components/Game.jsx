@@ -4,15 +4,17 @@ import { Sidebar } from './sidebar/Sidebar';
 import { Board } from './board/Board';
 import { WinScreen } from './WinScreen';
 
-import { shuffle } from '../utils/utils';
+import { shuffle, getEmoji } from '../utils/utils';
 import { device } from '../utils/constants';
 
 const createCards = (num) => {
   const cards = [];
 
   for (let index = 0; index < num; index += 1) {
+    const value = Math.floor((index % num) / 2).toString();
     const card = {
-      value: Math.floor((index % num) / 2).toString(),
+      value,
+      emoji: getEmoji(value),
       flipped: false,
       discarted: false,
       canFlip: true
@@ -77,7 +79,9 @@ export const Game = () => {
     }
     if (firstCard && secondCard) {
       if (firstCard.value === secondCard.value) {
-        discardCards();
+        setTimeout(() => {
+          discardCards();
+        }, 450);
       } else {
         setTimeout(() => {
           resetCards();
@@ -147,6 +151,11 @@ const Wrapper = styled.div`
   overflow: hidden;
   grid-template-columns: 100%;
   grid-template-rows: 60% 40%;
+
+  @media ${device.tablet} {
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 100%;
+  }
 
   @media ${device.laptop} {
     grid-template-columns: 70% 30%;

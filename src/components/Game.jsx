@@ -150,7 +150,7 @@ const Wrapper = styled.div`
   height: 100vh;
   overflow: hidden;
   grid-template-columns: 100%;
-  grid-template-rows: 60% 40%;
+  grid-template-rows: 50% 50%;
 
   @media ${device.tablet} {
     grid-template-columns: 70% 30%;

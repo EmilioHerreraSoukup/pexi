@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors } from '../../utils/constants';
+import { colors, device } from '../../utils/constants';
 
 export const Box = styled.div`
   width: 100%;
@@ -30,8 +30,11 @@ export const CardFace = styled.div`
   background: white;
   color: ${colors.gray};
   user-select: none;
+  font-size: 42px;
 
-  font-size: 65px;
+  @media ${device.tablet} {
+    font-size: 65px;
+  }
 `;
 
 export const Back = styled(CardFace)`

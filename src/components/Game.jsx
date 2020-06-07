@@ -79,9 +79,7 @@ export const Game = () => {
     }
     if (firstCard && secondCard) {
       if (firstCard.value === secondCard.value) {
-        setTimeout(() => {
-          discardCards();
-        }, 450);
+        discardCards();
       } else {
         setTimeout(() => {
           resetCards();

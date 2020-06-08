@@ -21,11 +21,11 @@ test('Card flipped state', () => {
   expect(card).toHaveStyle(`transform: rotateY(180deg) translateY(0);`);
 });
 
-test.only('Discards 2 matching cards', async () => {
-  const { container } = render(<Game />);
+test('Discards 2 matching cards', async () => {
+  const { getAllByTestId } = render(<Game />);
 
-  const card1 = container.querySelectorAll('[data-value="1"]')[0];
-  const card2 = container.querySelectorAll('[data-value="1"]')[1];
+  const card1 = getAllByTestId('backCard--1')[0];
+  const card2 = getAllByTestId('backCard--1')[1];
 
   fireEvent.click(card1);
   fireEvent.click(card2);

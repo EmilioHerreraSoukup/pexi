@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 export const Timer = ({ remainingPairs }) => {
   const [time, setTime] = useState(0);
 
-  const startTime = Date.now() - time;
-
   useEffect(() => {
+    const startTime = Date.now() - time;
+
     const interval = setInterval(() => {
       setTime(Date.now() - startTime);
     }, 1000);
@@ -17,7 +17,7 @@ export const Timer = ({ remainingPairs }) => {
     }
 
     return () => clearInterval(interval);
-  }, [remainingPairs]);
+  }, [remainingPairs, time]);
 
   const renderTime = () => {
     const seconds = `0${Math.floor(time / 1000) % 60}`.slice(-2);

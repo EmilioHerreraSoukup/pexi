@@ -7,10 +7,10 @@ export const Card = ({ card: { value, discarted, flipped, emoji }, onClick, inde
   const theme = useTheme();
 
   return (
-    <Box flipped={flipped} onClick={() => onClick(index)} data-testid="card" data-value={value}>
-      <CardFace discarted={discarted}>?</CardFace>
+    <Box flipped={flipped} onClick={() => onClick(index)} data-testid="card">
+      <CardFace>?</CardFace>
       {/* <CardFace discarted={discarted}>{emoji}</CardFace> */}
-      <Back color={theme.color} discarted={discarted}>
+      <Back color={theme.color} discarted={discarted} data-testid={`backCard--${value}`}>
         {emoji}
       </Back>
     </Box>

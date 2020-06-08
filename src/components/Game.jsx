@@ -27,13 +27,16 @@ const createCards = (num) => {
 
 export const Game = () => {
   const [cards, setCards] = useState(createCards(16));
-  const [gameStatus, setGameStatus] = useState({
+
+  const initialState = {
     remainingCards: 16,
     firstCard: null,
     secondCard: null,
     turnNumber: 0,
     turnType: 'win'
-  });
+  };
+
+  const [gameStatus, setGameStatus] = useState(initialState);
 
   const { firstCard, secondCard, remainingCards } = gameStatus;
 
@@ -43,69 +46,56 @@ export const Game = () => {
     setCards(updatedCards);
   };
 
-  const resetCards = () => {
+  const endTurn = (type) => {
     const updatedCards = [...cards];
-    updatedCards[firstCard.index] = { ...cards[firstCard.index], flipped: false, canFlip: true };
-    updatedCards[secondCard.index] = { ...cards[secondCard.index], flipped: false, canFlip: true };
+    const discard = type === 'discard';
+
+    // Set values depending if discarting or resetting cards
+    const updatedValues = {
+      ...(discard && { discarted: true }),
+      ...(!discard && { flipped: false }),
+      ...(!discard && { canFlip: true })
+    };
+
+    // Update first card
+    updatedCards[firstCard.index] = {
+      ...cards[firstCard.index],
+      ...updatedValues
+    };
+
+    // Update second card
+    updatedCards[secondCard.index] = {
+      ...cards[secondCard.index],
+      ...updatedValues
+    };
+
+    // Update cards
     setCards(updatedCards);
 
+    // Update game status
     setGameStatus({
       ...gameStatus,
       firstCard: null,
       secondCard: null,
       turnNumber: gameStatus.turnNumber + 1,
-      turnType: 'reset'
+      turnType: !discard ? 'reset' : 'win',
+      ...(discard && { remainingCards: remainingCards - 2 })
     });
-  };
-
-  const discardCards = () => {
-    const updatedCards = [...cards];
-    updatedCards[firstCard.index] = { ...cards[firstCard.index], discarted: true };
-    updatedCards[secondCard.index] = { ...cards[secondCard.index], discarted: true };
-    setCards(updatedCards);
-
-    setGameStatus({
-      ...gameStatus,
-      firstCard: null,
-      secondCard: null,
-      remainingCards: remainingCards - 2,
-      turnType: 'win'
-    });
-  };
-
-  const checkGameStatus = () => {
-    if (remainingCards === 0) {
-      // gameWon();
-    }
-    if (firstCard && secondCard) {
-      if (firstCard.value === secondCard.value) {
-        discardCards();
-      } else {
-        setTimeout(() => {
-          resetCards();
-        }, 1000);
-      }
-    }
   };
 
   const resetGame = () => {
     // Reset Cards
     setCards(createCards(16));
-
     // Reset Game Status
-    setGameStatus({
-      remainingCards: 16,
-      firstCard: null,
-      secondCard: null,
-      turnNumber: 0,
-      turnType: null
-    });
+    setGameStatus(initialState);
   };
 
   const handleCardClick = (index) => {
     if (!cards[index].canFlip) {
       return;
     }
+
+    // Flip first card
     if (!firstCard && !secondCard) {
       flipCard(index);
 
@@ -115,6 +105,7 @@ export const Game = () => {
       });
     }
 
+    // Flip second card
     if (firstCard && !secondCard) {
       flipCard(index);
       setGameStatus({
@@ -122,12 +113,21 @@ export const Game = () => {
         secondCard: { value: cards[index].value, index }
       });
     }
-    if (firstCard && secondCard) {
-      resetCards();
-    }
   };
 
   useEffect(() => {
+    function checkGameStatus() {
+      if (firstCard && secondCard) {
+        if (firstCard.value === secondCard.value) {
+          endTurn('discard');
+        } else {
+          setTimeout(() => {
+            endTurn('reset');
+          }, 1000);
+        }
+      }
+    }
+
     checkGameStatus();
   }, [firstCard, secondCard]);
 

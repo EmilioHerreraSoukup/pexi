@@ -129,6 +129,8 @@ export const Game = () => {
     }
 
     checkGameStatus();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firstCard, secondCard]);
 
   return (

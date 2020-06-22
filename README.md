@@ -18,4 +18,4 @@ npm start
 
 ## Test
 
-TODO
+npm run test

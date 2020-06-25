@@ -116,7 +116,7 @@ export const Game = () => {
   };
 
   useEffect(() => {
-    function checkGameStatus() {
+    const checkGameStatus = () => {
       if (firstCard && secondCard) {
         if (firstCard.value === secondCard.value) {
           endTurn('discard');
@@ -126,7 +126,7 @@ export const Game = () => {
           }, 1000);
         }
       }
-    }
+    };
 
     checkGameStatus();
 

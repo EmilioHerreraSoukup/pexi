@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { useTheme } from 'emotion-theming';
 import { Timer } from './Timer';
@@ -20,6 +21,10 @@ export const ProgressBar = ({ remainingPairs }) => {
       <Timer remainingPairs={remainingPairs} />
     </Holder>
   );
+};
+
+ProgressBar.propTypes = {
+  remainingPairs: PropTypes.number.isRequired
 };
 
 const Holder = styled.div`

@@ -28,7 +28,7 @@ const createCards = (num) => {
 export const Game = () => {
   const [cards, setCards] = useState(createCards(16));
 
-  const initialState = {
+  const initialGameState = {
     remainingCards: 16,
     firstCard: null,
     secondCard: null,
@@ -36,7 +36,7 @@ export const Game = () => {
     turnType: 'win'
   };
 
-  const [gameStatus, setGameStatus] = useState(initialState);
+  const [gameStatus, setGameStatus] = useState(initialGameState);
 
   const { firstCard, secondCard, remainingCards } = gameStatus;
 
@@ -48,25 +48,25 @@ export const Game = () => {
 
   const endTurn = (type) => {
     const updatedCards = [...cards];
-    const discard = type === 'discard';
+    const shouldDiscard = type === 'discard';
 
     // Set values depending if discarting or resetting cards
-    const updatedValues = {
-      ...(discard && { discarted: true }),
-      ...(!discard && { flipped: false }),
-      ...(!discard && { canFlip: true })
+    const updatedCardValues = {
+      ...(shouldDiscard && { discarted: true }),
+      ...(!shouldDiscard && { flipped: false }),
+      ...(!shouldDiscard && { canFlip: true })
     };
 
     // Update first card
     updatedCards[firstCard.index] = {
       ...cards[firstCard.index],
-      ...updatedValues
+      ...updatedCardValues
     };
 
     // Update second card
     updatedCards[secondCard.index] = {
       ...cards[secondCard.index],
-      ...updatedValues
+      ...updatedCardValues
     };
 
     // Update cards
@@ -78,8 +78,8 @@ export const Game = () => {
       firstCard: null,
       secondCard: null,
       turnNumber: gameStatus.turnNumber + 1,
-      turnType: !discard ? 'reset' : 'win',
-      ...(discard && { remainingCards: remainingCards - 2 })
+      turnType: !shouldDiscard ? 'reset' : 'win',
+      ...(shouldDiscard && { remainingCards: remainingCards - 2 })
     });
   };
 
@@ -87,7 +87,7 @@ export const Game = () => {
     // Reset Cards
     setCards(createCards(16));
     // Reset Game Status
-    setGameStatus(initialState);
+    setGameStatus(initialGameState);
   };
 
   const handleCardClick = (index) => {

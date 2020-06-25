@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import { keyframes } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 
@@ -75,6 +76,10 @@ export const Blocky = ({ turnType }) => {
       </Shadow>
     </Wrapper>
   );
+};
+
+Blocky.propTypes = {
+  turnType: PropTypes.string.isRequired
 };
 
 const float = keyframes`
